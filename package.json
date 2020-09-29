@@ -1,11 +1,14 @@
 {
-  "name": "magnetic",
+  "name": "@creatium/magnetic",
   "version": "0.0.1",
   "description": "A library for creating beautiful magnet effects",
   "main": "magnetic.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/grimalschi/magnetic.git"
+    "url": "git+https://github.com/creatium-io/magnetic.git"
+  },
+  "scripts": {
+    "build": "terser magnetic.js --compress --mangle -o magnetic.min.js"
   },
   "keywords": [
     "magnetic",
@@ -17,7 +20,10 @@
   "author": "Veaceslav Grimalschi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/grimalschi/magnetic/issues"
+    "url": "https://github.com/creatium-io/magnetic/issues"
   },
-  "homepage": "https://github.com/grimalschi/magnetic#readme"
+  "homepage": "https://github.com/creatium-io/magnetic#readme",
+  "devDependencies": {
+    "terser": "^5.3.3"
+  }
 }
