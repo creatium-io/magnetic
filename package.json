@@ -1,0 +1,23 @@
+{
+  "name": "magnetic",
+  "version": "0.0.1",
+  "description": "A library for creating beautiful magnet effects",
+  "main": "magnetic.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimalschi/magnetic.git"
+  },
+  "keywords": [
+    "magnetic",
+    "effects",
+    "ux",
+    "animation",
+    "interactive"
+  ],
+  "author": "Veaceslav Grimalschi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/grimalschi/magnetic/issues"
+  },
+  "homepage": "https://github.com/grimalschi/magnetic#readme"
+}
