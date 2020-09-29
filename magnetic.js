@@ -1,6 +1,6 @@
 
 // ------------------------------------------
-// Magnetic.js 0.0.1
+// Magnetic.js 0.1.0
 // A library for creating beautiful magnet effects
 // Copyright (c) 2020 Veaceslav Grimalschi (@grimalschi)
 // MIT license
@@ -26,6 +26,9 @@
     var instances = [];
 
     function render() {
+        var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
         var memory = {
             roots: [],
             rects: [],
@@ -43,6 +46,9 @@
 
                 instance.el_rect = instance.el.getBoundingClientRect();
 
+                instance.scrollTop = scrollTop;
+                instance.scrollLeft = scrollLeft;
+
                 instance.animated = true;
             }
         });
@@ -51,27 +57,30 @@
             var x = 0, y = 0;
 
             if (instance.hover) {
+                var mouse_x = mousepos.x + scrollLeft - instance.scrollLeft;
+                var mouse_y = mousepos.y + scrollTop - instance.scrollTop;
+
                 var virtual_width = instance.el_rect.width;
                 var el_center = instance.el_rect.left + instance.el_rect.width / 2;
 
-                if (mousepos.x < el_center) {
+                if (mouse_x < el_center) {
                     virtual_width += (instance.el_rect.left - instance.root_rect.left) * 2;
                 } else {
                     virtual_width += (instance.root_rect.right - instance.el_rect.right) * 2;
                 }
 
-                x = (mousepos.x - el_center) * (1 - instance.el_rect.width / virtual_width) * instance.distance;
+                x = (mouse_x - el_center) * (1 - instance.el_rect.width / virtual_width) * instance.distance;
 
                 var el_middle = instance.el_rect.top + instance.el_rect.height / 2;
                 var virtual_height = instance.el_rect.height;
 
-                if (mousepos.y < el_middle) {
+                if (mouse_y < el_middle) {
                     virtual_height += (instance.el_rect.top - instance.root_rect.top) * 2;
                 } else {
                     virtual_height += (instance.root_rect.bottom - instance.el_rect.bottom) * 2;
                 }
 
-                y = (mousepos.y - el_middle) * (1 - instance.el_rect.height / virtual_height) * instance.distance;
+                y = (mouse_y - el_middle) * (1 - instance.el_rect.height / virtual_height) * instance.distance;
             }
 
             instance.prevX = instance.prevX * (1 - instance.force) + x * instance.force;
@@ -132,6 +141,8 @@
 
         instance.prevX = 0;
         instance.prevY = 0;
+        instance.scrollTop = 0;
+        instance.scrollLeft = 0;
 
         instance.animated = false;
 
